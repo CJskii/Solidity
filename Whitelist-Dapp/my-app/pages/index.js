@@ -190,6 +190,8 @@ export default function Home() {
     }
   }, [walletConnected]);
 
+
+  
   return (
     <div className={styles.body}>
       <Head>
@@ -214,7 +216,7 @@ export default function Home() {
       </div>
 
       <footer className={styles.footer}>
-        <p>Created by <a href="https://github.com/CJskii" target="_blank" className={styles.anchor}>CJski</a></p>
+        <p>Created by CJski</p>
         Made with &#10084; by Crypto Devs
       </footer>
     </div>

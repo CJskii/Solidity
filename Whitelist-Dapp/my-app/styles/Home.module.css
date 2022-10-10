@@ -29,11 +29,6 @@
   color: #edf2f4;
 }
 
-.anchor:hover{
-  color: #91becf;
-  transition: ease-in-out 0.3s;
-}
-
 .image {
   width: 70%;
   height: 50%;
