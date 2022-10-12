@@ -346,7 +346,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Head>
         <title>Crypto Devs</title>
         <meta name="description" content="Whitelist-Dapp" />
@@ -369,6 +369,7 @@ export default function Home() {
       </div>
 
       <footer className={styles.footer}>
+        <p>CJski</p>
         Made with &#10084; by Crypto Devs
       </footer>
     </div>
