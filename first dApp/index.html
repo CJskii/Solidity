@@ -37,13 +37,10 @@
     <p id="showMood"></p>
   </div>
 
-  <script src="https://cdn.ethers.io/lib/ethers-5.4.umd.min.js" type="application/javascript"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" type="application/javascript"></script>
   </script>
   <script>
- const provider = new ethers.providers.Web3Provider(
-        window.ethereum,
-        "any"
-      );
+
 
     const MoodContractAddress = "0x3974c9E5F76da65Be66Aa4b0BB5Eec9c8d101c0a";
     const MoodContractABI = [
@@ -78,32 +75,31 @@
     let MoodContract
     let signer;
 
-    provider.on("network", async () => {
-      await provider.send("eth_requestAccounts", []);
-      const accounts = await provider.listAccounts();
-      signer = provider.getSigner(accounts[0]);
-      MoodContract = new ethers.Contract(
-        MoodContractAddress,
-        MoodContractABI,
-        signer);
-    });
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "sepolia");
+
+provider.send("eth_requestAccounts", []).then(() => {
+  provider.listAccounts().then((accounts) => {
+    signer = provider.getSigner(accounts[0]);
+    MoodContract = new ethers.Contract(
+      MoodContractAddress,
+      MoodContractABI,
+      signer
+    );
+  });
+});
 
 
     async function getMood() {
-      if (MoodContract) {
-        const getMoodPromise = await MoodContract.getMood();
+      const getMoodPromise = await MoodContract.getMood();
         const Mood = await getMoodPromise;
         document.getElementById("showMood").innerText = `Your Mood: ${Mood}`;
         console.log(Mood);
-      }
     }
 
     async function setMood() {
-      if(MoodContract) { 
-        const mood = document.getElementById("mood").value;
+      const mood = document.getElementById("mood").value;
         const setMoodPromise = MoodContract.setMood(mood);
         await setMoodPromise;
-      }
     }
 
 
